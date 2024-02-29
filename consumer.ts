@@ -1,8 +1,11 @@
 import amqp from 'amqplib';
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 
 async function getEvent() {
-    const conn = await amqp.connect('amqp://luis:luis2004@18.214.233.56');
+    const url = process.env.URL ?? "";
+    const conn = await amqp.connect(url);
     const channel = await conn.createChannel();
 
     const exchange = 'clients.ex';
